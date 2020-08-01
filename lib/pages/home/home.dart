@@ -5,6 +5,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    double statusBar = MediaQuery.of(context).padding.top;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -25,7 +26,30 @@ class Home extends StatelessWidget {
           ),
           Container(
             child: Column(
-              children: <Widget>[],
+              children: <Widget>[
+                Container(
+                  height: statusBar,
+                  // color: Colors.blueAccent,
+                ),
+                Container(
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            IconButton(
+                                icon: Icon(Icons.menu), onPressed: () => {}),
+                          ],
+                        ),
+                      ),
+                      Text('Pokedéx')
+                    ],
+                  ),
+                  height: 150,
+                  // color: (Color.fromARGB(200, 245, 215, 255)),
+                ),
+              ],
             ),
           ),
         ],
