@@ -38,16 +38,31 @@ class Home extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
-                            IconButton(
-                                icon: Icon(Icons.menu), onPressed: () => {}),
+                            Padding(
+                              padding: EdgeInsets.only(left: 3),
+                              child: IconButton(
+                                  icon: Icon(Icons.menu), onPressed: () => {}),
+                            ),
                           ],
                         ),
                       ),
-                      Text('Pokedéx')
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(left: 23),
+                            child: Text(
+                              'Pokedéx',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 28),
+                            ),
+                          ),
+                        ],
+                      )
                     ],
                   ),
-                  height: 150,
-                  // color: (Color.fromARGB(200, 245, 215, 255)),
+                  height: 110,
+                  color: (Color.fromARGB(200, 245, 215, 255)),
                 ),
               ],
             ),
