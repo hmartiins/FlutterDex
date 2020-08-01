@@ -24,7 +24,7 @@ class AppBarHome extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 23),
                 child: Text(
-                  'Pokedéx',
+                  'Pokedéxxx',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
                 ),
               ),
