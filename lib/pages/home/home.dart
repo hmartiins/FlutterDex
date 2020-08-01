@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdex/consts/consts.dart';
+import 'package:flutterdex/pages/home/widgets/app_bar.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -29,41 +30,8 @@ class Home extends StatelessWidget {
               children: <Widget>[
                 Container(
                   height: statusBar,
-                  // color: Colors.blueAccent,
                 ),
-                Container(
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.only(left: 3),
-                              child: IconButton(
-                                  icon: Icon(Icons.menu), onPressed: () => {}),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(left: 23),
-                            child: Text(
-                              'Pokedéx',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 28),
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                  height: 110,
-                  color: (Color.fromARGB(200, 245, 215, 255)),
-                ),
+                AppBarHome(),
               ],
             ),
           ),
