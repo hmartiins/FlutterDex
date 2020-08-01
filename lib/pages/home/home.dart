@@ -14,13 +14,13 @@ class Home extends StatelessWidget {
         overflow: Overflow.visible,
         children: <Widget>[
           Positioned(
-            top: -(160 / 4.5),
-            left: (screenWidth - (160 / 1.6)),
+            top: -(200 / 4.5),
+            left: (screenWidth - (200 / 1.6)),
             child: Opacity(
               child: Image.asset(
                 ConstsApp.whitePokeball,
-                height: 160,
-                width: 160,
+                height: 200,
+                width: 200,
               ),
               opacity: 0.2,
             ),
@@ -32,6 +32,11 @@ class Home extends StatelessWidget {
                   height: statusBar,
                 ),
                 AppBarHome(),
+                Expanded(
+                  child: ListView(
+                    children: <Widget>[ListTile(title: Text("Pokemon"))],
+                  ),
+                )
               ],
             ),
           ),
