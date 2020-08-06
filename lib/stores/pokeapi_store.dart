@@ -12,6 +12,9 @@ abstract class _PokeApiStoreBase with Store {
   @observable
   PokeAPI pokeAPI;
 
+  // @computed
+  // PokeAPI get PokeAPI => pokeAPI;
+
   @action
   fetchPokemonList() {
     pokeAPI = null;
