@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutterdex/consts/consts.dart';
 import 'package:flutterdex/models/pokeAPI.dart';
 import 'package:flutterdex/pages/home/widgets/app_bar.dart';
@@ -54,12 +55,61 @@ class _HomeState extends State<Home> {
                     child: Observer(builder: (BuildContext context) {
                       PokeAPI pokeAPI = pokeApiStore.pokeAPI;
                       return (pokeApiStore.pokeAPI != null)
-                          ? ListView.builder(
-                              itemCount: pokeAPI.pokemon.length,
-                              itemBuilder: (context, index) {
-                                return ListTile(
-                                    title: Text(pokeAPI.pokemon[index].name));
-                              },
+                          ? AnimationLimiter(
+                              child: GridView.builder(
+                                  physics: BouncingScrollPhysics(),
+                                  padding: EdgeInsets.all(12),
+                                  addAutomaticKeepAlives: false,
+                                  gridDelegate:
+                                      new SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2),
+                                  itemCount:
+                                      pokeApiStore.pokeAPI.pokemon.length,
+                                  itemBuilder: (context, index) {
+                                    return AnimationConfiguration.staggeredGrid(
+                                      position: index,
+                                      duration:
+                                          const Duration(milliseconds: 375),
+                                      columnCount: 2,
+                                      child: ScaleAnimation(
+                                        child: ScaleAnimation(
+                                            child: GestureDetector(
+                                          child: Container(),
+                                          /*child: PokeItem{
+                                          cor: _pokemonStore.getColorPokemon(
+                                            type: _pokemonStore.pokeApi.pokemon[index].type[0]
+                                          ),
+                                          tipos: _pokemonStore.pokeApi.pokemon[index].type,
+                                          nome: _pokemonStore.pokeApi.pokemon[index].name,
+                                          image: Hero(
+                                            tag: _pokemonStore.pokeApi.pokemon[index].numero,
+                                            child: Container(
+                                              margin: EdgeInsets.only(
+                                                left: 40, top: 40
+                                              ),
+                                              child: _pokemonStore.getImage(
+                                                numero: _pokemonStore
+                                                  .pokeApi
+                                                  .pokemon[index]
+                                                  .numero
+                                              ),
+                                            ),
+                                          )
+                                        } */
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          Container(),
+                                                  fullscreenDialog: true,
+                                                ));
+                                          },
+                                        )),
+                                      ),
+                                    );
+                                  }),
                             )
                           : Center(
                               child: CircularProgressIndicator(),
