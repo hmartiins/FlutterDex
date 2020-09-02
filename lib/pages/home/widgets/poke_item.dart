@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../consts/consts.dart';
+import '../../../consts/consts_api.dart';
 
 class PokeItem extends StatelessWidget {
   final String name;
@@ -29,16 +30,16 @@ class PokeItem extends StatelessWidget {
                   opacity: 0.3,
                   child: Image.asset(
                     ConstsApp.whitePokeball,
-                    height: 103,
-                    width: 103,
+                    height: 93,
+                    width: 93,
                   ),
                 ),
               ),
               Align(
                 alignment: Alignment.bottomRight,
                 child: CachedNetworkImage(
-                  height: 100,
-                  width: 100,
+                  height: 90,
+                  width: 90,
                   placeholder: (context, url) => new Container(
                     color: Colors.transparent,
                   ),
@@ -46,19 +47,22 @@ class PokeItem extends StatelessWidget {
                       'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/$num.png',
                 ),
               ),
-              Text(
-                name,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  name,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ],
           ),
         ),
         decoration: BoxDecoration(
-          color: Colors.red,
+          color: ConstsAPI.getColorType(type: types[0]),
           borderRadius: BorderRadius.all(
             Radius.circular(20),
           ),
