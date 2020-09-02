@@ -83,6 +83,9 @@ class _HomeState extends State<Home> {
                                           child: PokeItem(
                                             index: index,
                                             name: pokemon.name,
+                                            image: pokeApiStore.getImage(
+                                              number: pokemon.num,
+                                            ),
                                           ),
                                           onTap: () {
                                             Navigator.push(

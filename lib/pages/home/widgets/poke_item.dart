@@ -16,7 +16,7 @@ class PokeItem extends StatelessWidget {
       child: Container(
         child: Stack(
           children: <Widget>[
-            
+            image, 
           ],
         ),
         decoration: BoxDecoration(

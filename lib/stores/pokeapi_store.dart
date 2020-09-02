@@ -27,6 +27,17 @@ abstract class _PokeApiStoreBase with Store {
     return pokeAPI.pokemon[index];
   }
 
+  @action
+  Widget getImage({String number}){
+    return CachedNetworkImage(
+      placeholder: (context, url) => new Container(
+        color: Colors.transparent,
+      ),
+      imageUrl:
+        'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/$number.png',
+    );
+  }
+
   Future<PokeAPI> loadPokeAPI() async {
     try {
       final response = await http.get(ConstsAPI.pokeApiUrl);
@@ -39,15 +50,5 @@ abstract class _PokeApiStoreBase with Store {
       
       return null;
     }
-  }
-
-  Widget getImage({String number}){
-    return CachedNetworkImage(
-      placeholder: (context, url) => new Container(
-        color: Colors.transparent,
-      ),
-      imageUrl:
-        'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/$numero.png',
-    );
   }
 }
