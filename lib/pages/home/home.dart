@@ -6,6 +6,7 @@ import 'package:flutterdex/models/pokeAPI.dart';
 import 'package:flutterdex/pages/home/widgets/app_bar.dart';
 import 'package:flutterdex/stores/pokeapi_store.dart';
 
+import '../../stores/pokeapi_store.dart';
 import 'widgets/poke_item.dart';
 
 class Home extends StatefulWidget {
@@ -54,49 +55,59 @@ class _HomeState extends State<Home> {
                 AppBarHome(),
                 Expanded(
                   child: Container(
-                    child: Observer(builder: (BuildContext context) {
-                      PokeAPI pokeAPI = pokeApiStore.pokeAPI;
-                      return (pokeApiStore.pokeAPI != null)
-                        ? AnimationLimiter(
-                          child: GridView.builder(
-                            physics: BouncingScrollPhysics(),
-                            padding: EdgeInsets.all(12),
-                            addAutomaticKeepAlives: false,
-                            gridDelegate:
-                                new SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,),
-                            itemCount:
-                                pokeApiStore.pokeAPI.pokemon.length,
-                            itemBuilder: (context, index) {
-                              return AnimationConfiguration.staggeredGrid(
-                                position: index,
-                                duration:
-                                    const Duration(milliseconds: 375),
-                                columnCount: 2,
-                                child: ScaleAnimation(
-                                  child: GestureDetector(
-                                    child: PokeItem(),
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder:
-                                        (BuildContext context) =>
-                                          Container(),
-                                        fullscreenDialog: true,
-                                      ));
-                                    },
+                    child: Observer(
+                      builder: (BuildContext context) {
+                        PokeAPI pokeAPI = pokeApiStore.pokeAPI;
+                        return (pokeApiStore.pokeAPI != null)
+                            ? AnimationLimiter(
+                                child: GridView.builder(
+                                  physics: BouncingScrollPhysics(),
+                                  padding: EdgeInsets.all(12),
+                                  addAutomaticKeepAlives: false,
+                                  gridDelegate:
+                                      new SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
                                   ),
+                                  itemCount:
+                                      pokeApiStore.pokeAPI.pokemon.length,
+                                  itemBuilder: (context, index) {
+                                    Pokemon pokemon =
+                                        pokeApiStore.getPokemon(index: index);
+                                    return AnimationConfiguration.staggeredGrid(
+                                      position: index,
+                                      duration:
+                                          const Duration(milliseconds: 375),
+                                      columnCount: 2,
+                                      child: ScaleAnimation(
+                                        child: GestureDetector(
+                                          child: PokeItem(
+                                            index: index,
+                                            name: pokemon.name,
+                                          ),
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        Container(),
+                                                fullscreenDialog: true,
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 ),
+                              )
+                            : Center(
+                                child: CircularProgressIndicator(),
                               );
-                            }),
-                          )
-                        : Center(
-                          child: CircularProgressIndicator(),
-                        );
-                    }),
+                      },
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           ),

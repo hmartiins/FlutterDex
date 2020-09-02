@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:flutterdex/consts/consts_api.dart';
 import 'package:flutterdex/models/pokeAPI.dart';
 import 'package:mobx/mobx.dart';
@@ -37,5 +39,15 @@ abstract class _PokeApiStoreBase with Store {
       
       return null;
     }
+  }
+
+  Widget getImage({String number}){
+    return CachedNetworkImage(
+      placeholder: (context, url) => new Container(
+        color: Colors.transparent,
+      ),
+      imageUrl:
+        'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/$numero.png',
+    );
   }
 }
