@@ -82,10 +82,9 @@ class _HomeState extends State<Home> {
                                         child: GestureDetector(
                                           child: PokeItem(
                                             index: index,
+                                            types: pokemon.type,
                                             name: pokemon.name,
-                                            image: pokeApiStore.getImage(
-                                              number: pokemon.num,
-                                            ),
+                                            num: pokemon.num,
                                           ),
                                           onTap: () {
                                             Navigator.push(
