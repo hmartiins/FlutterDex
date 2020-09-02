@@ -20,6 +20,11 @@ abstract class _PokeApiStoreBase with Store {
     });
   }
 
+  @action
+  getPokemon({int index}){
+    return pokeAPI.pokemon[index];
+  }
+
   Future<PokeAPI> loadPokeAPI() async {
     try {
       final response = await http.get(ConstsAPI.pokeApiUrl);
@@ -28,7 +33,7 @@ abstract class _PokeApiStoreBase with Store {
       return PokeAPI.fromJson(decodeJson);
     } catch (error, stacktrace) {
       print(error);
-      print("Error on load the list");
+      print("Error on load the list" + stacktrace.toString());
       
       return null;
     }
