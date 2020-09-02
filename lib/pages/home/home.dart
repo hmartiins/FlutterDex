@@ -6,6 +6,8 @@ import 'package:flutterdex/models/pokeAPI.dart';
 import 'package:flutterdex/pages/home/widgets/app_bar.dart';
 import 'package:flutterdex/stores/pokeapi_store.dart';
 
+import 'widgets/poke_item.dart';
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -55,65 +57,43 @@ class _HomeState extends State<Home> {
                     child: Observer(builder: (BuildContext context) {
                       PokeAPI pokeAPI = pokeApiStore.pokeAPI;
                       return (pokeApiStore.pokeAPI != null)
-                          ? AnimationLimiter(
-                              child: GridView.builder(
-                                  physics: BouncingScrollPhysics(),
-                                  padding: EdgeInsets.all(12),
-                                  addAutomaticKeepAlives: false,
-                                  gridDelegate:
-                                      new SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 2),
-                                  itemCount:
-                                      pokeApiStore.pokeAPI.pokemon.length,
-                                  itemBuilder: (context, index) {
-                                    return AnimationConfiguration.staggeredGrid(
-                                      position: index,
-                                      duration:
-                                          const Duration(milliseconds: 375),
-                                      columnCount: 2,
-                                      child: ScaleAnimation(
-                                        child: ScaleAnimation(
-                                            child: GestureDetector(
-                                          child: Container(),
-                                          /*child: PokeItem{
-                                          cor: _pokemonStore.getColorPokemon(
-                                            type: _pokemonStore.pokeApi.pokemon[index].type[0]
-                                          ),
-                                          tipos: _pokemonStore.pokeApi.pokemon[index].type,
-                                          nome: _pokemonStore.pokeApi.pokemon[index].name,
-                                          image: Hero(
-                                            tag: _pokemonStore.pokeApi.pokemon[index].numero,
-                                            child: Container(
-                                              margin: EdgeInsets.only(
-                                                left: 40, top: 40
-                                              ),
-                                              child: _pokemonStore.getImage(
-                                                numero: _pokemonStore
-                                                  .pokeApi
-                                                  .pokemon[index]
-                                                  .numero
-                                              ),
-                                            ),
-                                          )
-                                        } */
-                                          onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder:
-                                                      (BuildContext context) =>
-                                                          Container(),
-                                                  fullscreenDialog: true,
-                                                ));
-                                          },
-                                        )),
-                                      ),
-                                    );
-                                  }),
-                            )
-                          : Center(
-                              child: CircularProgressIndicator(),
-                            );
+                        ? AnimationLimiter(
+                          child: GridView.builder(
+                            physics: BouncingScrollPhysics(),
+                            padding: EdgeInsets.all(12),
+                            addAutomaticKeepAlives: false,
+                            gridDelegate:
+                                new SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,),
+                            itemCount:
+                                pokeApiStore.pokeAPI.pokemon.length,
+                            itemBuilder: (context, index) {
+                              return AnimationConfiguration.staggeredGrid(
+                                position: index,
+                                duration:
+                                    const Duration(milliseconds: 375),
+                                columnCount: 2,
+                                child: ScaleAnimation(
+                                  child: GestureDetector(
+                                    child: PokeItem(),
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder:
+                                        (BuildContext context) =>
+                                          Container(),
+                                        fullscreenDialog: true,
+                                      ));
+                                    },
+                                  ),
+                                ),
+                              );
+                            }),
+                          )
+                        : Center(
+                          child: CircularProgressIndicator(),
+                        );
                     }),
                   ),
                 )

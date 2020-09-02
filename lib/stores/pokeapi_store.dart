@@ -12,9 +12,6 @@ abstract class _PokeApiStoreBase with Store {
   @observable
   PokeAPI pokeAPI;
 
-  // @computed
-  // PokeAPI get PokeAPI => pokeAPI;
-
   @action
   fetchPokemonList() {
     pokeAPI = null;
@@ -27,10 +24,12 @@ abstract class _PokeApiStoreBase with Store {
     try {
       final response = await http.get(ConstsAPI.pokeApiUrl);
       var decodeJson = jsonDecode(response.body);
+
       return PokeAPI.fromJson(decodeJson);
     } catch (error, stacktrace) {
       print(error);
       print("Error on load the list");
+      
       return null;
     }
   }
